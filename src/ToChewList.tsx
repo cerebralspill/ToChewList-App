@@ -12,6 +12,8 @@ export const ToChewList: React.FC = () => {
         { id: 2, text: "Scramble eggs", completed: false }
     ]);
 
+    const  [input, setInput] = useState<string>("");
+
     const handleToggle = (id:number) => {
         setTochews(
             tochews.map((tochew) => {
@@ -23,6 +25,10 @@ export const ToChewList: React.FC = () => {
         )
     }
 
+    const handleClick = () => {
+        const newTochew: item = { id: Date.now(), text:input, completed: false };
+        setTochews([...tochews, newTochew]);
+    };
     return (
         <div className="main-container">
             <h1>ToChewList</h1>;
@@ -33,8 +39,8 @@ export const ToChewList: React.FC = () => {
                     </li>
                 ))}
             </ul>
-        <input type="text" placeholder="Add tochew item" />
-        <button>Add</button>
+        <input type="text" placeholder="Add tochew item" onChange={(e)=> setInput(e.currentTarget.value)}/>
+        <button onClick={handleClick}>Add</button>
         </div>
     );
 };
